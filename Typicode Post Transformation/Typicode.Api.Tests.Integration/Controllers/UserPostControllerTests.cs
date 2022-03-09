@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using Typicode.Api.Controllers;
 using Typicode.Api.Domain;
-using Typicode.Api.Services;
+using Typicode.Api.Domain.Services;
 
 using Xunit;
 
@@ -17,18 +17,18 @@ namespace Typicode.Api.Tests.Integration.Controllers;
 
 public class UserPostControllerTests
 {
-    private readonly ITypicodeRestService restService;
+    private readonly IUserService userService;
 
-    public UserPostControllerTests(ITypicodeRestService restService)
+    public UserPostControllerTests(IUserService userService)
     {
-        this.restService = Guard.Argument(restService, nameof(restService)).NotNull().Value;
+        this.userService = Guard.Argument(userService, nameof(userService)).NotNull().Value;
     }
 
     [Fact]
     public async Task GivenDataAvailable_WhenUserPostTransformationRequested_ThenReturnTransformedData()
     {
         // Arrange
-        var sut = new UserPostController(this.restService);
+        var sut = new UserPostController(this.userService);
 
         // Act
         var result = await sut.Get();

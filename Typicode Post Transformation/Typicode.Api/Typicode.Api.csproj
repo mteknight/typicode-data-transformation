@@ -13,6 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Compile Include="Domain\Services\.Interfaces\IUserService.cs" />
       <Compile Include="Services\.Interfaces\ITypicodeRestService.cs" />
     </ItemGroup>
 

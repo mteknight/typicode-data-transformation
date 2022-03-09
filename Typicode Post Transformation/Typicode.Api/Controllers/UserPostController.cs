@@ -2,8 +2,7 @@ using Dawn;
 
 using Microsoft.AspNetCore.Mvc;
 
-using Typicode.Api.Domain;
-using Typicode.Api.Services;
+using Typicode.Api.Domain.Services;
 
 namespace Typicode.Api.Controllers;
 
@@ -11,25 +10,18 @@ namespace Typicode.Api.Controllers;
 [Route("[controller]")]
 public class UserPostController : ControllerBase
 {
-    private readonly ITypicodeRestService restService;
+    private readonly IUserService userService;
 
-    public UserPostController(ITypicodeRestService restService)
+    public UserPostController(IUserService userService)
     {
-        this.restService = Guard.Argument(restService, nameof(restService)).NotNull().Value;
+        this.userService = Guard.Argument(userService, nameof(userService)).NotNull().Value;
     }
 
     [HttpGet]
     [Produces(typeof(IEnumerable<dynamic>))]
     public async Task<IActionResult> Get(CancellationToken cancellationToken = default)
     {
-        var users = await this.restService.GetData<User>("users", cancellationToken);
-        var posts = await this.restService.GetData<Post>("posts", cancellationToken);
-
-        var userPosts = users
-            .GroupJoin(posts,
-                user => user.Id,
-                post => post.UserId,
-                (user, posts) => new UserPosts(user, (uint)posts.Count()));
+        var userPosts = await this.userService.TransformPosts(cancellationToken);
 
         return this.Ok(userPosts);
     }

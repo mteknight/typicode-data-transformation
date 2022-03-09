@@ -1,4 +1,6 @@
-﻿using Typicode.Api.Services;
+﻿using Typicode.Api.Controllers;
+using Typicode.Api.Domain.Services;
+using Typicode.Api.Services;
 
 namespace Typicode.Api.Configurations;
 
@@ -8,6 +10,7 @@ public static class ServiceCollectionExtensions
     {
         return services
             .AddHttpClient()
-            .AddSingleton<ITypicodeRestService, TypicodeRestService>();
+            .AddSingleton<ITypicodeRestService, TypicodeRestService>()
+            .AddSingleton<IUserService, UserService>();
     }
 }
