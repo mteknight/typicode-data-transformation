@@ -1,5 +1,3 @@
-using System.Net.Http;
-
 using Dawn;
 
 using FluentAssertions;
@@ -14,18 +12,18 @@ namespace Typicode.Api.Tests.Controllers;
 
 public class UserPostControllerTests
 {
-    private readonly IHttpClientFactory httpClientFactory;
+    private readonly ITypicodeRestService restService;
 
-    public UserPostControllerTests(IHttpClientFactory httpClientFactory)
+    public UserPostControllerTests(ITypicodeRestService restService)
     {
-        this.httpClientFactory = Guard.Argument(httpClientFactory, nameof(httpClientFactory)).NotNull().Value;
+        this.restService = Guard.Argument(restService, nameof(restService)).NotNull().Value;
     }
 
     [Fact]
     public void GivenDataAvailable_WhenUserPostTransformationRequested_ThenReturnTransformedData()
     {
         // Arrange
-        var sut = new UserPostController(this.httpClientFactory);
+        var sut = new UserPostController(this.restService);
 
         // Act
         var result = sut.Get();

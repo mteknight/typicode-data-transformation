@@ -1,10 +1,13 @@
-﻿namespace Typicode.Api.Configurations;
+﻿using Typicode.Api.Controllers;
+
+namespace Typicode.Api.Configurations;
 
 public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterDependencies(this IServiceCollection services)
     {
         return services
-            .AddHttpClient();
+            .AddHttpClient()
+            .AddSingleton<ITypicodeRestService, TypicodeRestService>();
     }
 }

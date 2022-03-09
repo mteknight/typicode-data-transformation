@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 using Dawn;
@@ -17,18 +16,18 @@ namespace Typicode.Api.Tests.Integration.Controllers;
 
 public class UserPostControllerTests
 {
-    private readonly IHttpClientFactory httpClientFactory;
+    private readonly ITypicodeRestService restService;
 
-    public UserPostControllerTests(IHttpClientFactory httpClientFactory)
+    public UserPostControllerTests(ITypicodeRestService restService)
     {
-        this.httpClientFactory = Guard.Argument(httpClientFactory, nameof(httpClientFactory)).NotNull().Value;
+        this.restService = Guard.Argument(restService, nameof(restService)).NotNull().Value;
     }
 
     [Fact]
     public async Task GivenDataAvailable_WhenUserPostTransformationRequested_ThenReturnTransformedData()
     {
         // Arrange
-        var sut = new UserPostController(this.httpClientFactory);
+        var sut = new UserPostController(this.restService);
 
         // Act
         var result = await sut.Get();
