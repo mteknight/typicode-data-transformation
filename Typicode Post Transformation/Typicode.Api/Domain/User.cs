@@ -11,4 +11,8 @@ public record User
     }
 
     public UserId Id { get; }
+
+    public string Name { get; init; }
+
+    public string Username { get; init; }
 }
