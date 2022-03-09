@@ -9,13 +9,13 @@ public record UserPosts
     [JsonConstructor]
     public UserPosts(
         User user,
-        ICollection<Post> posts)
+        uint totalPosts)
     {
         this.User = Guard.Argument(user, nameof(user)).NotNull().Value;
-        this.Posts = Guard.Argument(posts, nameof(posts)).NotNull().Value;
+        this.TotalPosts = totalPosts;
     }
 
     public User User { get; }
 
-    public ICollection<Post> Posts { get; }
+    public uint TotalPosts { get; }
 }

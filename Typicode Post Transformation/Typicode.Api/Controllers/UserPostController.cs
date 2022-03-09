@@ -33,7 +33,7 @@ public class UserPostController : ControllerBase
             .GroupJoin(posts,
                 user => user.Id,
                 post => post.UserId,
-                (user, posts) => new UserPosts(user, posts.ToArray()));
+                (user, posts) => new UserPosts(user, (uint)posts.Count()));
 
         return this.Ok(userPosts);
     }
