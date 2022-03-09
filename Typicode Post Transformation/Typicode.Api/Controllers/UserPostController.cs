@@ -2,6 +2,7 @@ using Dawn;
 
 using Microsoft.AspNetCore.Mvc;
 
+using Typicode.Api.Domain;
 using Typicode.Api.Domain.Services;
 
 namespace Typicode.Api.Controllers;
@@ -18,7 +19,7 @@ public class UserPostController : ControllerBase
     }
 
     [HttpGet]
-    [Produces(typeof(IEnumerable<dynamic>))]
+    [Produces(typeof(IEnumerable<UserPosts>))]
     public async Task<IActionResult> Get(CancellationToken cancellationToken = default)
     {
         var userPosts = await this.userService.TransformPosts(cancellationToken);
