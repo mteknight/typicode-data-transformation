@@ -1,4 +1,4 @@
-﻿using Typicode.Api.Controllers;
+﻿using Typicode.Api.Services;
 
 namespace Typicode.Api.Configurations;
 

@@ -5,6 +5,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 
 using Typicode.Api.Controllers;
+using Typicode.Api.Services;
 
 using Xunit;
 
